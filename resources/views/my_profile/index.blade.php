@@ -35,15 +35,15 @@
 
                         <ul class="my-account-nav">
                             <li class="sub-nav-title">Manage Account</li>
-                            <li><a href="my-profile.html" class="current"><i class="sl sl-icon-user"></i> My Profile</a>
+                            <li><a href="{{ route('my_profile.index') }}" class="current"><i class="sl sl-icon-user"></i> My Profile</a>
                             </li>
                             <li><a href="my-bookmarks.html"><i class="sl sl-icon-star"></i> Bookmarked Listings</a></li>
                         </ul>
 
                         <ul class="my-account-nav">
                             <li class="sub-nav-title">Manage Listings</li>
-                            <li><a href="my-properties.html"><i class="sl sl-icon-docs"></i> My Properties</a></li>
-                            <li><a href="submit-property.html"><i class="sl sl-icon-action-redo"></i> Submit New
+                            <li><a href="{{ route('properties.index') }}"><i class="sl sl-icon-docs"></i> My Properties</a></li>
+                            <li><a href="{{ route('properties.create') }}"><i class="sl sl-icon-action-redo"></i> Submit New
                                     Property</a></li>
                         </ul>
 
