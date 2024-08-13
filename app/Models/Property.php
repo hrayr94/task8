@@ -9,6 +9,7 @@ class Property extends Model
 {
     use HasFactory;
 
+
     const STATUS_SALE = 0;
     const STATUS_RENT = 1;
     const TYPE_APARTMENT = 0;
@@ -16,6 +17,7 @@ class Property extends Model
     const TYPE_COMMERCIAL = 2;
     const TYPE_GARAGE = 3;
     const TYPE_LOT = 4;
+
 
     const STATUSES = [
         self::STATUS_SALE => 'For Sale',
@@ -47,12 +49,9 @@ class Property extends Model
         '50 + Years' => '50 + Years',
     ];
 
-
-
     protected $fillable = [
-        'title', 'status', 'type', 'price', 'area', 'rooms', 'address', 'city', 'state', 'zip_code','user_id'
+        'title', 'status', 'type', 'price', 'area', 'rooms', 'address', 'city', 'state', 'zip_code', 'user_id'
     ];
-
 
 
     public function user()
@@ -70,6 +69,7 @@ class Property extends Model
         return $this->hasOne(PropertyDetails::class, 'property_id', 'id');
     }
 
+
     public static function getStatuses()
     {
         return self::STATUSES;
@@ -80,4 +80,24 @@ class Property extends Model
         return self::TYPES;
     }
 
+    public static function getRooms()
+    {
+        return self::ROOMS;
+    }
+
+
+    public function getStatusLabel()
+    {
+        return self::STATUSES[$this->status] ?? 'Unknown';
+    }
+
+    public function getTypeLabel()
+    {
+        return self::TYPES[$this->type] ?? 'Unknown';
+    }
+
+    public function getRoomLabel()
+    {
+        return self::ROOMS[$this->rooms] ?? 'Unknown';
+    }
 }

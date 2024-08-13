@@ -21,7 +21,7 @@ class PropertyController extends Controller
         return view('properties.index', compact('properties'));
     }
 
-    public function welcome(): string
+    public function welcome()
     {
         $properties = Property::all();
 

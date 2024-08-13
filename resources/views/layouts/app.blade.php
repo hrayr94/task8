@@ -23,6 +23,7 @@
 <body>
 <div id="wrapper">
     <!-- Header Container -->
+
     @include('layouts.header')
 
     @yield('content')

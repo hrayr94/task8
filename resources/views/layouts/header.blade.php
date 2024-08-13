@@ -169,12 +169,9 @@
                     <nav id="navigation" class="style-1">
                         <ul id="responsive">
 
-                            <li><a class="current" href="#">Home</a>
+                            <li><a class="current" href="/">Home</a>
                                 <ul>
                                     <li><a href="/">Home 1</a></li>
-                                    <li><a href="index-2.html">Home 2</a></li>
-                                    <li><a href="index-3.html">Home 3</a></li>
-                                    <li><a href="index-4.html">Home 4</a></li>
                                 </ul>
                             </li>
 
@@ -183,27 +180,7 @@
                                     <li><a href="#">List Layout</a>
                                         <ul>
                                             <li><a href="listings-list-with-sidebar.html">With Sidebar</a></li>
-                                            <li><a href="listings-list-with-map.html">With Map</a></li>
-                                            <li><a href="listings-list-full-width.html">Full Width</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Grid Layout</a>
-                                        <ul>
-                                            <li><a href="listings-grid-standard-with-sidebar.html">Standard With
-                                                    Sidebar</a></li>
-                                            <li><a href="listings-grid-compact-with-sidebar.html">Compact With
-                                                    Sidebar</a></li>
-                                            <li><a href="listings-grid-with-map.html">With Map</a></li>
-                                            <li><a href="listings-grid-full-width.html">Full Width</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Half Map</a>
-                                        <ul>
-                                            <li><a href="listings-half-map-list.html">List Layout</a></li>
-                                            <li><a href="listings-half-map-grid-standard.html">Grid Standard Layout</a>
-                                            </li>
-                                            <li><a href="listings-half-map-grid-compact.html">Grid Compact Layout</a>
-                                            </li>
+                                            <li><a href="{{ route('search.properties') }}">Full Width</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -284,9 +261,11 @@
                                 </div>
 
                                 <ul>
-                                    <li><a href="{{ route('my_profile.index') }}"><i class="sl sl-icon-user"></i> My Profile</a></li>
+                                    <li><a href="{{ route('my_profile.index') }}"><i class="sl sl-icon-user"></i> My
+                                            Profile</a></li>
                                     <li><a href="my-bookmarks.html"><i class="sl sl-icon-star"></i> Bookmarks</a></li>
-                                    <li><a href="{{ route('properties.index') }}"><i class="sl sl-icon-docs"></i> My Properties</a>
+                                    <li><a href="{{ route('properties.index') }}"><i class="sl sl-icon-docs"></i> My
+                                            Properties</a>
                                     </li>
                                     <li>
                                         <form action="{{ route('logout') }}" method="POST" style="display: inline;">
