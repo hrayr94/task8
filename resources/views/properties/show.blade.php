@@ -116,23 +116,23 @@
                     <div class="listings-container list-layout">
 
                         <!-- Listing Item -->
-                        @foreach($properties->take(3) as $property)
+                        @foreach($properties->take(3) as $similiar_property)
                             <div class="listing-item">
 
                                 <a href="#" class="listing-img-container">
                                     <div class="listing-badges">
-                                        <span>{{ $property->status }}</span>
+                                        <span>{{ $similiar_property->status }}</span>
                                     </div>
 
                                     <div class="listing-img-content">
                                         <span
-                                            class="listing-price">${{ $property->price }} <i>{{ $property->price_per_sq_ft ? '$'.$property->price_per_sq_ft.' / sq ft' : '' }}</i></span>
+                                            class="listing-price">${{ $similiar_property->price }} <i>{{ $similiar_property->price_per_sq_ft ? '$'.$property->price_per_sq_ft.' / sq ft' : '' }}</i></span>
                                         <span class="like-icon"></span>
                                     </div>
 
-                                    @foreach($property->images as $image)
+                                    @foreach($similiar_property->images as $image)
                                         <img src="{{ \Illuminate\Support\Facades\Storage::url($image->image) }}"
-                                             alt="{{ $property->title }}">
+                                             alt="{{ $similiar_property->title }}">
                                     @endforeach
 
                                 </a>
@@ -140,27 +140,27 @@
                                 <div class="listing-content">
                                     <div class="listing-title">
                                         <h4>
-                                            <a href="{{route('properties.show', $property->id)}}">{{ $property->title }}</a>
+                                            <a href="{{route('properties.show', $similiar_property->id)}}">{{ $similiar_property->title }}</a>
                                         </h4>
-                                        <a href="https://maps.google.com/maps?q={{ urlencode($property->address) }}&hl=en&t=v&hnear={{ urlencode($property->address) }}"
+                                        <a href="https://maps.google.com/maps?q={{ urlencode($similiar_property->address) }}&hl=en&t=v&hnear={{ urlencode($similiar_property->address) }}"
                                            class="listing-address popup-gmaps">
                                             <i class="fa fa-map-marker"></i>
-                                            {{ $property->address }}
+                                            {{ $similiar_property->address }}
                                         </a>
 
                                         <a href="#" class="details button border">Details</a>
                                     </div>
 
                                     <ul class="listing-details">
-                                        <li>{{ $property->area }} sq ft</li>
-                                        <li>{{ $property->bedrooms }} Bedroom</li>
-                                        <li>{{ $property->rooms }} Rooms</li>
-                                        <li>{{ $property->bathrooms }} Bathroom</li>
+                                        <li>{{ $similiar_property->area }} sq ft</li>
+                                        <li>{{ $similiar_property->bedrooms }} Bedroom</li>
+                                        <li>{{ $similiar_property->rooms }} Rooms</li>
+                                        <li>{{ $similiar_property->bathrooms }} Bathroom</li>
                                     </ul>
 
                                     <div class="listing-footer">
-                                        <a href="#"><i class="fa fa-user"></i> {{ $property->agent_name }}</a>
-                                        <span><i class="fa fa-calendar-o"></i> {{ $property->created_at->diffForHumans() }}</span>
+                                        <a href="#"><i class="fa fa-user"></i> {{ $similiar_property->agent_name }}</a>
+                                        <span><i class="fa fa-calendar-o"></i> {{ $similiar_property->created_at->diffForHumans() }}</span>
                                     </div>
 
                                 </div>
@@ -198,97 +198,100 @@
 
                     <!-- Booking Widget -->
                     <div class="widget">
-                        <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
-                            <h3><i class="fa fa-calendar-check-o"></i> Schedule a Tour</h3>
-                            <div class="row with-forms  margin-top-0">
+                        <form action="{{ route('bookings.store') }}" method="post">
+                            @csrf
+                            <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
+                                <h3><i class="fa fa-calendar-check-o"></i> Schedule a Tour</h3>
+                                <div class="row with-forms  margin-top-0">
 
-                                <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
-                                <div class="col-lg-12">
-                                    <input type="text" id="date-picker" placeholder="Date" readonly="readonly">
-                                </div>
+                                    <!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
+                                    <div class="col-lg-12">
+                                        <input type="date" name="date" id="date-picker" placeholder="Date">
+                                    </div>
 
-                                <!-- Panel Dropdown -->
-                                <div class="col-lg-12">
-                                    <div class="panel-dropdown time-slots-dropdown">
-                                        <a href="#">Time</a>
-                                        <div class="panel-dropdown-content padding-reset">
-                                            <div class="panel-dropdown-scrollable">
 
-                                                <!-- Time Slot -->
-                                                <div class="time-slot">
-                                                    <input type="radio" name="time-slot" id="time-slot-1">
-                                                    <label for="time-slot-1">
-                                                        <strong>8:30 am - 9:00 am</strong>
-                                                        <span>1 slot available</span>
-                                                    </label>
+                                    <!-- Panel Dropdown -->
+                                    <div class="col-lg-12">
+                                        <div class="panel-dropdown time-slots-dropdown">
+                                            <a href="#">Time</a>
+                                            <div class="panel-dropdown-content padding-reset">
+                                                <div class="panel-dropdown-scrollable">
+
+                                                    <!-- Time Slot -->
+                                                    <div class="time-slot">
+                                                        <input type="radio" name="time_slot" id="time-slot-1">
+                                                        <label for="time-slot-1">
+                                                            <strong>8:30 am - 9:00 am</strong>
+                                                            <span>1 slot available</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <!-- Time Slot -->
+                                                    <div class="time-slot">
+                                                        <input type="radio" name="time_slot" id="time-slot-2">
+                                                        <label for="time-slot-2">
+                                                            <strong>9:00 am - 9:30 am</strong>
+                                                            <span>2 slots available</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <!-- Time Slot -->
+                                                    <div class="time-slot">
+                                                        <input type="radio" name="time_slot" id="time-slot-3">
+                                                        <label for="time-slot-3">
+                                                            <strong>9:30 am - 10:00 am</strong>
+                                                            <span>1 slots available</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <!-- Time Slot -->
+                                                    <div class="time-slot">
+                                                        <input type="radio" name="time_slot" id="time-slot-4">
+                                                        <label for="time-slot-4">
+                                                            <strong>10:00 am - 10:30 am</strong>
+                                                            <span>3 slots available</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <!-- Time Slot -->
+                                                    <div class="time-slot">
+                                                        <input type="radio" name="time_slot" id="time-slot-5">
+                                                        <label for="time-slot-5">
+                                                            <strong>13:00 pm - 13:30 pm</strong>
+                                                            <span>2 slots available</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <!-- Time Slot -->
+                                                    <div class="time-slot">
+                                                        <input type="radio" name="time_slot" id="time-slot-6">
+                                                        <label for="time-slot-6">
+                                                            <strong>13:30 pm - 14:00 pm</strong>
+                                                            <span>1 slots available</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <!-- Time Slot -->
+                                                    <div class="time-slot">
+                                                        <input type="radio" name="time_slot" id="time-slot-7">
+                                                        <label for="time-slot-7">
+                                                            <strong>14:00 pm - 14:30 pm</strong>
+                                                            <span>1 slots available</span>
+                                                        </label>
+                                                    </div>
+
                                                 </div>
-
-                                                <!-- Time Slot -->
-                                                <div class="time-slot">
-                                                    <input type="radio" name="time-slot" id="time-slot-2">
-                                                    <label for="time-slot-2">
-                                                        <strong>9:00 am - 9:30 am</strong>
-                                                        <span>2 slots available</span>
-                                                    </label>
-                                                </div>
-
-                                                <!-- Time Slot -->
-                                                <div class="time-slot">
-                                                    <input type="radio" name="time-slot" id="time-slot-3">
-                                                    <label for="time-slot-3">
-                                                        <strong>9:30 am - 10:00 am</strong>
-                                                        <span>1 slots available</span>
-                                                    </label>
-                                                </div>
-
-                                                <!-- Time Slot -->
-                                                <div class="time-slot">
-                                                    <input type="radio" name="time-slot" id="time-slot-4">
-                                                    <label for="time-slot-4">
-                                                        <strong>10:00 am - 10:30 am</strong>
-                                                        <span>3 slots available</span>
-                                                    </label>
-                                                </div>
-
-                                                <!-- Time Slot -->
-                                                <div class="time-slot">
-                                                    <input type="radio" name="time-slot" id="time-slot-5">
-                                                    <label for="time-slot-5">
-                                                        <strong>13:00 pm - 13:30 pm</strong>
-                                                        <span>2 slots available</span>
-                                                    </label>
-                                                </div>
-
-                                                <!-- Time Slot -->
-                                                <div class="time-slot">
-                                                    <input type="radio" name="time-slot" id="time-slot-6">
-                                                    <label for="time-slot-6">
-                                                        <strong>13:30 pm - 14:00 pm</strong>
-                                                        <span>1 slots available</span>
-                                                    </label>
-                                                </div>
-
-                                                <!-- Time Slot -->
-                                                <div class="time-slot">
-                                                    <input type="radio" name="time-slot" id="time-slot-7">
-                                                    <label for="time-slot-7">
-                                                        <strong>14:00 pm - 14:30 pm</strong>
-                                                        <span>1 slots available</span>
-                                                    </label>
-                                                </div>
-
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Panel Dropdown / End -->
+
                                 </div>
-                                <!-- Panel Dropdown / End -->
 
+                                <!-- Book Now -->
+                                <button type="submit" class="button book-now fullwidth margin-top-5">Send Request</button>
                             </div>
-
-                            <!-- Book Now -->
-                            <a href="#" class="button book-now fullwidth margin-top-5">Send Request</a>
-                        </div>
-
+                        </form>
                     </div>
                     <!-- Booking Widget / End -->
 
@@ -298,179 +301,33 @@
 
                         <!-- Agent Widget -->
                         <div class="agent-widget">
-                            <div class="agent-title">
-                                <div class="agent-photo"><img src="/images/agent-avatar.jpg" alt=""/></div>
-                                <div class="agent-details">
-                                    <h4><a href="#">Jennie Wilson</a></h4>
-                                    <span><i class="sl sl-icon-call-in"></i>(123) 123-456</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
+                            <form action="{{ route('leads.create') }}" method="post">
+                                @csrf
+                                <div class="agent-title">
+                                    <div class="agent-photo"><img src="/images/agent-avatar.jpg" alt=""/></div>
 
-                            <input type="text" placeholder="Your Email"
-                                   pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$">
-                            <input type="text" placeholder="Your Phone">
-                            <textarea>I'm interested in this property [ID 123456] and I'd like to know more details.</textarea>
-                            <button class="button fullwidth margin-top-5">Send Message</button>
+                                    <div class="agent-details">
+                                        <h4><a href="#">{{ $property->user->name}}</a></h4>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <input type="text" name="email" placeholder="Your Email"
+                                       pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$">
+                                <input type="text" name="phone" placeholder="Your Phone">
+                                <textarea name="message">I'm interested in this property [ID 123456] and I'd like to know more details.</textarea>
+                                <button class="button fullwidth margin-top-5">Send Message</button>
+                            </form>
                         </div>
                         <!-- Agent Widget / End -->
 
                     </div>
                     <!-- Widget / End -->
-
-
-                    <!-- Widget -->
-                    <div class="widget">
-                        <h3 class="margin-bottom-30 margin-top-30">Mortgage Calculator</h3>
-
-                        <!-- Mortgage Calculator -->
-                        <form action="javascript:void(0);" autocomplete="off" class="mortgageCalc"
-                              data-calc-currency="USD">
-                            <div class="calc-input">
-                                <div class="pick-price tip" data-tip-content="Set This Property Price"></div>
-                                <input type="text" id="amount" name="amount" placeholder="Sale Price" required>
-                                <label for="amount" class="fa fa-usd"></label>
-                            </div>
-
-                            <div class="calc-input">
-                                <input type="text" id="downpayment" placeholder="Down Payment">
-                                <label for="downpayment" class="fa fa-usd"></label>
-                            </div>
-
-                            <div class="calc-input">
-                                <input type="text" id="years" placeholder="Loan Term (Years)" required>
-                                <label for="years" class="fa fa-calendar-o"></label>
-                            </div>
-
-                            <div class="calc-input">
-                                <input type="text" id="interest" placeholder="Interest Rate" required>
-                                <label for="interest" class="fa fa-percent"></label>
-                            </div>
-
-                            <button class="button calc-button" formvalidate>Calculate</button>
-                            <div class="calc-output-container">
-                                <div class="notification success">Monthly Payment: <strong class="calc-output"></strong>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- Mortgage Calculator / End -->
-
-                    </div>
-                    <!-- Widget / End -->
-
-
-                    <!-- Widget -->
-                    <div class="widget">
-                        <h3 class="margin-bottom-35">Featured Properties</h3>
-
-                        <div class="listing-carousel outer">
-                            <!-- Item -->
-                            <div class="item">
-                                <div class="listing-item compact">
-
-                                    <a href="#" class="listing-img-container">
-
-                                        <div class="listing-badges">
-                                            <span class="featured">Featured</span>
-                                            <span>For Sale</span>
-                                        </div>
-
-                                        <div class="listing-img-content">
-                                            <span class="listing-compact-title">Eagle Apartments <i>$275,000</i></span>
-
-                                            <ul class="listing-hidden-content">
-                                                <li>Area <span>530 sq ft</span></li>
-                                                <li>Rooms <span>3</span></li>
-                                                <li>Beds <span>1</span></li>
-                                                <li>Baths <span>1</span></li>
-                                            </ul>
-                                        </div>
-
-                                        <img src="/images/listing-01.jpg" alt="">
-                                    </a>
-
-                                </div>
-                            </div>
-                            <!-- Item / End -->
-
-                            <!-- Item -->
-                            <div class="item">
-                                <div class="listing-item compact">
-
-                                    <a href="#" class="listing-img-container">
-
-                                        <div class="listing-badges">
-                                            <span class="featured">Featured</span>
-                                            <span>For Sale</span>
-                                        </div>
-
-                                        <div class="listing-img-content">
-                                            <span class="listing-compact-title">Selway Apartments <i>$245,000</i></span>
-
-                                            <ul class="listing-hidden-content">
-                                                <li>Area <span>530 sq ft</span></li>
-                                                <li>Rooms <span>3</span></li>
-                                                <li>Beds <span>1</span></li>
-                                                <li>Baths <span>1</span></li>
-                                            </ul>
-                                        </div>
-
-                                        <img src="/images/listing-02.jpg" alt="">
-                                    </a>
-
-                                </div>
-                            </div>
-                            <!-- Item / End -->
-
-                            <!-- Item -->
-                            <div class="item">
-                                <div class="listing-item compact">
-
-                                    <a href="#" class="listing-img-container">
-
-                                        <div class="listing-badges">
-                                            <span class="featured">Featured</span>
-                                            <span>For Sale</span>
-                                        </div>
-
-                                        <div class="listing-img-content">
-                                            <span class="listing-compact-title">Oak Tree Villas <i>$325,000</i></span>
-
-                                            <ul class="listing-hidden-content">
-                                                <li>Area <span>530 sq ft</span></li>
-                                                <li>Rooms <span>3</span></li>
-                                                <li>Beds <span>1</span></li>
-                                                <li>Baths <span>1</span></li>
-                                            </ul>
-                                        </div>
-
-                                        <img src="/images/listing-03.jpg" alt="">
-                                    </a>
-
-                                </div>
-                            </div>
-                            <!-- Item / End -->
-                        </div>
-
-                    </div>
-                    <!-- Widget / End -->
-
                 </div>
             </div>
             <!-- Sidebar / End -->
 
         </div>
     </div>
-    <!-- Replacing dropdown placeholder with selected time slot -->
-    <script>
-        $(".time-slot").each(function () {
-            var timeSlot = $(this);
-            $(this).find('input').on('change', function () {
-                var timeSlotVal = timeSlot.find('strong').text();
-
-                $('.panel-dropdown.time-slots-dropdown a').html(timeSlotVal);
-                $('.panel-dropdown').removeClass('active');
-            });
-        });
-    </script>
 @endsection

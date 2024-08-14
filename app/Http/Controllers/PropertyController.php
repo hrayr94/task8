@@ -10,6 +10,7 @@ use App\Models\PropertyDetails;
 use App\Models\PropertyImages;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 
 class PropertyController extends Controller
@@ -92,28 +93,13 @@ class PropertyController extends Controller
         return redirect()->route('properties.index')->with('success', 'Property updated successfully');
     }
 
-    private function getSimilarProperties(Property $property)
+    public function show($id): View
     {
-        return Property::where('id', '!=', $property->id)
-            ->where('area', $property->area)
-            ->take(5)
-            ->get()
-            ->all();
-    }
 
-    public function show($id): string
-    {
-        $property = Property::with('details')->findOrFail($id);
+        $property = Property::query()->with('user')->findOrFail($id);
         $properties = Property::all();
+        return view('properties.show', compact('property','properties'));
 
-        if (!$property) {
-            abort(404);
-        }
-
-        return view('properties.show', [
-            'property' => $property,
-            'properties' => $properties,
-        ]);
     }
 
 
