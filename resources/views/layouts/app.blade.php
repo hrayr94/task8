@@ -102,6 +102,17 @@
             $('.panel-dropdown').removeClass('active');
         });
     });
+
+    $("#area-range").on("slidechange", function(event, ui) {
+        $("#min_area").val(ui.values[0]);
+        $("#max_area").val(ui.values[1]);
+    });
+
+    $("#price-range").on("slidechange", function(event, ui) {
+        $("#min_price").val(ui.values[0]);
+        $("#max_price").val(ui.values[1]);
+    });
+
 </script>
 
 </body>

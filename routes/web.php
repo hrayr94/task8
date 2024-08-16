@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ComparingPropertiesController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\MyProfileController;
 use App\Http\Controllers\ProfileController;
@@ -26,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('my_profile', [MyProfileController::class, 'index'])->name('my_profile.index');
     Route::put('my_profile', [MyProfileController::class, 'update'])->name('my_profile.update');
     Route::delete('my_profile', [MyProfileController::class, 'destroy'])->name('my_profile.destroy');
-
+    Route::resource('comparing_properties', ComparingPropertiesController::class);
 });
 
 require __DIR__ . '/auth.php';

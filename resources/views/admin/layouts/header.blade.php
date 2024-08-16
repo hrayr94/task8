@@ -58,6 +58,9 @@
                 <a href="{{ route('admin.features.index') }}" class="nav-link">Features</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
+                <a href="{{ route('admin.leads.index') }}" class="nav-link">Leads</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
                 <form action="{{ route('admin.logout') }}" method="post">
                     @csrf
                     <button class="btn btn-danger nav-link">Log Out</button>

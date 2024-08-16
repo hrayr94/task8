@@ -9,45 +9,56 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        $query = Property::query();
+        $query = Property::query()
+            ->join('property_details', 'properties.id', '=', 'property_details.property_id')
+            ->select('properties.*', 'property_details.bedrooms', 'property_details.bathrooms');
 
-        // Status filter
-        $query->when($request->input('tab') && $request->input('tab') !== 'Any Status', function ($q) use ($request) {
-            $q->where('status', $request->input('tab'));
+        $query->when($request->filled('status'), function ($q) use ($request) {
+            $q->where('properties.status', $request->input('status'));
         });
 
-        // Location filter
         $query->when($request->filled('autocomplete-input'), function ($q) use ($request) {
-            $q->where('address', 'LIKE', '%' . $request->input('autocomplete-input') . '%');
+            $q->where('properties.address', 'LIKE', '%' . $request->input('autocomplete-input') . '%');
         });
 
-        // Price filter
+        $query->when($request->filled('min_area'), function ($q) use ($request) {
+            $q->where('properties.area', '>=', $request->input('min_area'));
+        });
+
+        $query->when($request->filled('max_area'), function ($q) use ($request) {
+            $q->where('properties.area', '<=', $request->input('max_area'));
+        });
+
         $query->when($request->filled('min_price'), function ($q) use ($request) {
-            $q->where('price', '>=', $request->input('min_price'));
+            $q->where('properties.price', '>=', $request->input('min_price'));
         });
 
         $query->when($request->filled('max_price'), function ($q) use ($request) {
-            $q->where('price', '<=', $request->input('max_price'));
+            $q->where('properties.price', '<=', $request->input('max_price'));
         });
 
-        // Beds filter
         $query->when($request->filled('beds'), function ($q) use ($request) {
-            $q->where('bedrooms', $request->input('beds'));
+            $q->where('property_details.bedrooms', $request->input('beds'));
         });
 
-        // Baths filter
         $query->when($request->filled('baths'), function ($q) use ($request) {
-            $q->where('bathrooms', $request->input('baths'));
+            $q->where('property_details.bathrooms', $request->input('baths'));
         });
 
-        // Type filter (if applicable)
         $query->when($request->filled('type'), function ($q) use ($request) {
-            $q->where('type', $request->input('type'));
+            $q->where('properties.type', $request->input('type'));
         });
 
-        // Execute the query and get the results with pagination
-        $properties = $query->paginate(10); // Use paginate() instead of get()
+        $properties = $query->paginate(10);
 
-        return view('listing.listing_list_full', compact('properties'));
+        $view = $request->input('view', 'sidebar');
+
+        switch ($view) {
+            case 'full-width':
+                return view('listing.listing_list_full', compact('properties'));
+            case 'sidebar':
+            default:
+                return view('listing.listing_list_sidebar', compact('properties'));
+        }
     }
 }

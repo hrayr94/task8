@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Features;
+use App\Models\Lead;
 use App\Models\Property;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class AdminController extends Controller
         $users = User::count();
         $properties = Property::count();
         $features = Features::count();
-        return view('admin.index', compact('users', 'properties', 'features'));
+        $leads = Lead::count();
+        return view('admin.index', compact('users', 'properties', 'features', 'leads'));
     }
 
     // Show the login form for admins
