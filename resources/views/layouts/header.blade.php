@@ -102,7 +102,7 @@
                                     <li><a href="{{ route('blogs.index') }}">Blog</a>
                                         <ul>
                                             <li><a href="{{ route('blogs.index') }}">Blog</a></li>
-                                            <li><a href="{{ route('blogs.show', $blog->id) }}">Blog Post</a></li>
+{{--                                            <li><a href="{{ route('blogs.show') }}">Blog Post</a></li>--}}
                                         </ul>
                                     </li>
                                 </ul>

@@ -61,19 +61,15 @@
                 <div class="col-md-4">
                     <div class="sidebar right">
                         <!-- Search Widget -->
-                        <div class="widget">
-                            <h3 class="margin-top-0 margin-bottom-25">Search Blog</h3>
-                            <div class="search-blog-input">
-                                <form action="{{ route('blogs.search') }}" method="GET">
-                                    <input class="search-field" type="text" name="query" placeholder="Type and hit enter" value="{{ request()->query('query') }}">
-                                </form>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-
-                        <!-- Other Widgets -->
-                        <!-- Include any other widgets you have here -->
-
+{{--                        <div class="widget">--}}
+{{--                            <h3 class="margin-top-0 margin-bottom-25">Search Blog</h3>--}}
+{{--                            <div class="search-blog-input">--}}
+{{--                                <form action="{{ route('blogs.search') }}" method="GET">--}}
+{{--                                    <input class="search-field" type="text" name="query" placeholder="Type and hit enter" value="{{ request()->query('query') }}">--}}
+{{--                                </form>--}}
+{{--                            </div>--}}
+{{--                            <div class="clearfix"></div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

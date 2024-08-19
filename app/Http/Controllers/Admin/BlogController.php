@@ -54,7 +54,7 @@ class BlogController extends Controller
                 Storage::delete('public/blog_images/' . $blog->image);
             }
 
-            $blog->image = $request->file('image')->store('public/blog_images');
+            $blog->image = $request->file('image')->store('images', 'public');
         }
 
         $blog->title = $request->input('title', $blog->title);

@@ -15,6 +15,7 @@ Route::get('/properties', [PropertyController::class, 'index'])->name('propertie
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blogs.index');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blogs.show');
+Route::get('/blog/search', [BlogController::class, 'search'])->name('blogs.search');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search.properties');
 Route::resource('properties', PropertyController::class);

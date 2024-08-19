@@ -30,9 +30,9 @@ class BlogController extends Controller
             ->get();
 
         // Получить популярные посты (предполагается, что у вас есть поле views)
-        $popularPosts = Blog::orderBy('views', 'desc')->take(5)->get();
+//        $popularPosts = Blog::orderBy('views', 'desc')->take(5)->get();
 
-        return view('blogs.show', compact('blog', 'previous', 'next', 'relatedPosts', 'popularPosts'));
+        return view('blogs.show', compact('blog', 'previous', 'next', 'relatedPosts'));
     }
 
     public function search(Request $request)
