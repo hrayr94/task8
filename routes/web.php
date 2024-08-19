@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ComparingPropertiesController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\MyProfileController;
@@ -16,6 +17,9 @@ Route::get('/properties', [PropertyController::class, 'index'])->name('propertie
 Route::get('/blog', [BlogController::class, 'index'])->name('blogs.index');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blogs.show');
 Route::get('/blog/search', [BlogController::class, 'search'])->name('blogs.search');
+
+Route::post('/blogs/{blog}/comments', [CommentController::class, 'store'])->name('comments.store');
+
 
 Route::get('/search', [SearchController::class, 'search'])->name('search.properties');
 Route::resource('properties', PropertyController::class);
