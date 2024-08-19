@@ -32,17 +32,14 @@
 
                     <!-- Loop through blog posts -->
                     @foreach ($blogs as $blog)
+{{--                        @dd($blog)--}}
                         <div class="blog-post">
                             <a href="{{ route('blogs.show', $blog->id) }}" class="post-img">
                                 <img src="{{ Storage::url($blog->image) }}" alt="">
                             </a>
                             <div class="post-content">
                                 <h3><a href="{{ route('blogs.show', $blog->id) }}">{{ $blog->title }}</a></h3>
-                                <ul class="post-meta">
-                                    <li>{{ $blog->created_at->format('F d, Y') }}</li>
-                                    <li><a href="#">{{ $blog->comments_count }} Comments</a></li>
-                                </ul>
-                                <p>{{ Str::limit($blog->content, 150) }}</p>
+                                <p>{{ Str::limit($blog->description, 150) }}</p>
                                 <a href="{{ route('blogs.show', $blog->id) }}" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
