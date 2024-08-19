@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <!-- Content ================================================== -->
+    <!-- Content -->
     <div class="container">
         <!-- Blog Posts -->
         <div class="blog-page">
@@ -33,7 +33,7 @@
                         <!-- Img -->
                         <img class="post-img" src="{{ Storage::url($blog->image) }}" alt="{{ $blog->title }}">
 
-                        {{--                        <!-- Content -->--}}
+                                                <!-- Content -->
                         <div class="post-content">
                             <h3>{{ $blog->title }}</h3>
                             {!! $blog->description !!}
