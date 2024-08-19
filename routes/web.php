@@ -7,10 +7,14 @@ use App\Http\Controllers\MyProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\BlogController;
 
 
 Route::get('/', [PropertyController::class, 'welcome']);
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blogs.index');
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blogs.show');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search.properties');
 Route::resource('properties', PropertyController::class);

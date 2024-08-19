@@ -26,9 +26,9 @@ Route::middleware('admin')->group(function () {
     Route::get('blogs', [BlogController::class, 'index'])->name('admin.blogs.index');
     Route::get('blogs/create', [BlogController::class, 'create'])->name('admin.blogs.create');
     Route::post('blogs', [BlogController::class, 'store'])->name('admin.blogs.store');
-    Route::get('blogs/{blog}/edit', [BlogController::class, 'edit'])->name('admin.blogs.edit');
-    Route::put('blogs/{blog}', [BlogController::class, 'update'])->name('admin.blogs.update');
-    Route::delete('blogs/{blog}', [BlogController::class, 'destroy'])->name('admin.blogs.destroy');
+    Route::get('blogs/{blogs}/edit', [BlogController::class, 'edit'])->name('admin.blogs.edit');
+    Route::put('blogs/{blogs}', [BlogController::class, 'update'])->name('admin.blogs.update');
+    Route::delete('blogs/{blogs}', [BlogController::class, 'destroy'])->name('admin.blogs.destroy');
 
 
 
